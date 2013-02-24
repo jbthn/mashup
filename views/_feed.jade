@@ -1,0 +1,23 @@
+script(type="text/javascript", src="https://www.google.com/jsapi")
+
+script(type='text/javascript')
+  google.load("feeds", "1");
+
+  function OnLoad() {
+    var query = '#{terms}';
+    google.feeds.findFeeds(query, findDone);
+  }
+
+  function findDone(result) {
+    if (!result.error) {
+      var content = document.getElementById('feed');
+      var html = '';
+      for (var i = 0; i < result.entries.length; i++) {
+        var entry = result.entries[i];
+        html += '<p><a href="/feed/' + encodeURIComponent(entry.url) + '">' + entry.title + '</a></p>';
+      }
+      content.innerHTML = html;
+    }
+  }
+
+  google.setOnLoadCallback(OnLoad);

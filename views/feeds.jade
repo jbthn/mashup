@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  .navbar.navbarfixed-top
+    .navbar-inner
+      .container
+        a.btn.btn-navbar(data-toggle='collapse', data-target='.nav-collapse')
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.brand(href='/') Newsblr
+        #main-menu.nav-collapse.collapse
+          ul#main-menu-left.nav
+            li.active
+              a(href='/') Find Feeds
+            li
+              a(href='/me') My Profile
+           ul#main-menu-right.nav.pull-right
+            li.divider-vertical
+            li
+              a #{username}
+  .container
+    .page-header
+      h1 RSS feed results for 
+        i "#{terms}"
+    .row
+      .span10#select
+        include _feed
+        div(class='row-fluid')
+          div(id='feed', class = 'span12')

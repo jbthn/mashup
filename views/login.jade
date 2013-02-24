@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  .navbar.navbarfixed-top
+    .navbar-inner
+      .container
+        a.btn.btn-navbar(data-toggle='collapse', data-target='.nav-collapse')
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.brand(href='/') Newsblr
+        #main-menu.nav-collapse.collapse
+          ul#main-menu-left.nav
+            li
+              a(href='/') Find Feeds
+            li
+              a(href='/me') My Profile
+  .container
+    .page-header
+      h1
+        | Welcome to Newsblr!
+      form.well.form-search(method='post', action='/login')
+        input.input-medium(type='text', name='name', placeholder='Username')
+        &nbsp;
+        button.btn(type='submit') Log in / Sign up

@@ -1,0 +1,39 @@
+extends layout
+
+block content
+  .navbar.navbarfixed-top
+    .navbar-inner
+      .container(style='width: auto')
+        a.btn.btn-navbar(data-toggle='collapse', data-target='.nav-collapse')
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.brand(href='/') Newsblr
+        #main-menu.nav-collapse.collapse
+          ul#main-menu-left.nav
+            li
+              a(href='/') Find Feeds
+            li.active
+              a(href='/me') My Profile
+           ul#main-menu-right.nav.pull-right
+            li.divider-vertical
+            li
+              a #{user.name}
+
+  .container
+    .page-header
+      h1 #{user.name}'s Newsblr
+    .row
+      .span10#select
+        -var summ = [];
+        each site, i in user.sites
+          -summ.push(site.summary);
+          div
+            h4
+              a(href=site.link)
+                | #{site.title} 
+              br
+            h4
+              i (#{site.source})
+            p #{site.summary}
+            br

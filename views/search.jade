@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  .navbar.navbarfixed-top
+    .navbar-inner
+      .container
+        a.btn.btn-navbar(data-toggle='collapse', data-target='.nav-collapse')
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.brand(href='/') Newsblr
+        #main-menu.nav-collapse.collapse
+          ul#main-menu-left.nav
+            li.active
+              a(href='/') Find Feeds
+            li
+              a(href='/me') My Profile
+           ul#main-menu-right.nav.pull-right
+            li.divider-vertical
+            li
+              a #{username}
+  .container
+    .page-header
+      h1
+        | Search for an RSS feed
+    .row
+      .span10
+        form.well.form-search(method='post', action='/results')
+          input.input-xlarge.search-query(type='text', name='terms', placeholder='keywords')
+          &nbsp;
+          button.btn(type='submit')
+            | Search

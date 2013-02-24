@@ -1,0 +1,59 @@
+extends layout
+
+block content
+  script(type="text/javascript", src="https://www.google.com/jsapi")
+  script(type='text/javascript')
+    google.load("feeds", "1");
+
+    function initialize() {
+      var feed = new google.feeds.Feed("#{url}");
+      feed.setNumEntries(6);
+      feed.load(function(result) {
+        if (!result.error) {
+          var title = document.getElementById("title");
+          title.innerHTML = 'Latest from ' + result.feed.title.italics();
+
+          var container = document.getElementById("feed");
+          for (var i = 0; i < result.feed.entries.length; i++) {
+            var entry = result.feed.entries[i];
+            var div = document.createElement("div");
+            div.setAttribute("class", "row");
+            html = '<div class="span8"><a target="_blank" href="' + entry.link + '">';
+            html += entry.title + '</a><p>' + entry.contentSnippet + '</p></div>';
+            html += '<div class="span2" id="form' + i + '"><form method="post" action="/new"><input type="hidden" name = "link" value="';
+            html += entry.link + '"><input type="hidden" name = "title" value="' + entry.title + '"><input type="hidden" name = "content" value="';
+            html += entry.contentSnippet + '"><input type="hidden" name = "from" value="' + result.feed.title;
+            html += '"><button type="submit" class="btn">Re-news</button></div>';
+            div.innerHTML = html;
+
+            container.appendChild(div);
+          }
+        }
+      });
+    }
+    google.setOnLoadCallback(initialize);
+
+  .navbar.navbarfixed-top
+    .navbar-inner
+      .container
+        a.btn.btn-navbar(data-toggle='collapse', data-target='.nav-collapse')
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.brand(href='/') Newsblr
+        #main-menu.nav-collapse.collapse
+          ul#main-menu-left.nav
+            li.active
+              a(href='/') Find Feeds
+            li
+              a(href='/me') My Profile
+           ul#main-menu-right.nav.pull-right
+            li.divider-vertical
+            li
+              a #{username}
+
+  .container
+    .page-header
+      h1#title 
+    .row
+      .span10#feed
