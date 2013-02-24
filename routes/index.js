@@ -60,6 +60,6 @@ exports.me = function (req, res) {
 		.populate('sites', null, null, { sort: [['created', 'desc']] })
 		.exec(function(err, user){
 			if (err) throw err;
-			res.render('me', {title: 'Newslr', user: user});
+			res.render('me', {title: 'Newsblr', user: user});
 		});
 }
