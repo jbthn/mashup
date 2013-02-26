@@ -24,6 +24,10 @@ block content
       h1
         | Search for an RSS feed
     .row
+      .span7
+        p When you find an interesting RSS feed, click on it to see the latest articles. Then you can "re-news" the articles on your profile.
+        br
+    .row
       .span10
         form.well.form-search(method='post', action='/results')
           input.input-xlarge.search-query(type='text', name='terms', placeholder='keywords')
